@@ -13,7 +13,7 @@
 
         public decimal Price { get; set; }
 
-        public string Area { get; set; }
+        public virtual Area Area { get; set; }
 
         public string PhoneForReservation { get; set; }
     }

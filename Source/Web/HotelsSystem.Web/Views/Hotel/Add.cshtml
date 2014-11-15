@@ -1,0 +1,88 @@
+﻿@using System.Linq
+@model HotelsSystem.Web.InputModels.Hotel.AddInputModel
+@{
+    ViewBag.Title = "Add new Hotel";
+}
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("Add", "Hotel", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <fieldset>
+        <legend>Задължителни полета</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "height: 200px" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.AreaId, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.DropDownListFor(m => m.AreaId, (IEnumerable<SelectListItem>)ViewBag.Areas, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Stars, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.DropDownListFor(m => m.Stars, (IEnumerable<SelectListItem>)ViewBag.Stars, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "5"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneForReservation, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.PhoneForReservation, new { @class = "form-control" })
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Опционални полета</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneForReservation2, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.PhoneForReservation2, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.AvailablePlaces, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.AvailablePlaces, new { @class = "form-control", type = "number", step = "5"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.WebSite, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Adress, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextBoxFor(m => m.Adress, new { @class = "form-control" })
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group text-center">
+        <input type="submit" value="Ask question" class="btn btn-primary btn-lg" />
+    </div>
+}
+

@@ -13,8 +13,9 @@
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [Required]
-        public string Area { get; set; }
+        public int AreaId { get; set; }
+        
+        public virtual Area Area { get; set; }
 
         [MaxLength(50)]
         public string Adress { get; set; }
