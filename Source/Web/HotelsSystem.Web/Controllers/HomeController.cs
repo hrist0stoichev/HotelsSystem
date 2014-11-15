@@ -1,12 +1,14 @@
 ﻿namespace HotelsSystem.Web.Controllers
 {
     using System.Web.Mvc;
+    using System.Linq;
 
     using AutoMapper.QueryableExtensions;
 
     using HotelsSystem.Data.Common.Repository;
     using HotelsSystem.Data.Models;
     using HotelsSystem.Web.ViewModels.Home;
+    using PagedList;
 
     public class HomeController : Controller
     {
@@ -17,11 +19,11 @@
             this.hotels = hotels;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var model = this.hotels.All().Project().To<IndexHotelViewModel>();
+            var hotels = this.hotels.All().OrderBy(h => h.Id).Project().To<IndexHotelViewModel>().ToPagedList(page ?? 1, 20);
 
-            return this.View(model);
+            return this.View(hotels);
         }
     }
 }

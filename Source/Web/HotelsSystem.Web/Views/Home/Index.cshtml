@@ -1,4 +1,6 @@
-﻿@model IEnumerable<HotelsSystem.Web.ViewModels.Home.IndexHotelViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList<HotelsSystem.Web.ViewModels.Home.IndexHotelViewModel>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -8,4 +10,8 @@
     {
         Html.RenderPartial("_IndexHotelPartial", hotel);
     }
+    <div class="row text-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+        Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Hotels
+    </div>
 </div>
