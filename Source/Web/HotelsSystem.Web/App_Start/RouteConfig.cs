@@ -14,6 +14,11 @@
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Add Hotel",
+                url: "addHotel",
+                defaults: new { controller = "Hotel", action = "Add"});
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });

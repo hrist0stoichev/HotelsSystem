@@ -20,6 +20,8 @@
 
         public IDbSet<Hotel> Hotels { get; set; }
 
+        public IDbSet<Area> Areas { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
