@@ -1,0 +1,37 @@
+﻿@using HotelsSystem.Web.Infrastructure.Helpers
+@model HotelsSystem.Web.ViewModels.Home.IndexHotelViewModel
+@{
+    var stars = Model.Stars == 1 ? "star" : "stars";
+    var description = Model.Description.Length > 300 ? Model.Description.Substring(0, 300) + "..." : Model.Description;
+    <div class="row">
+        <div class="col-md-2 image-container">
+            @Html.Image("http://media-cdn.tripadvisor.com/media/photo-s/03/0c/2e/fe/hotel-ibis-hermosillo.jpg", "image", new { @class = "img-thumbnail" })
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                @Html.Raw(string.Format("<h3>Хотел \"{0}\", {1}, {2} {3}</h3>", Model.Name, Model.Area, Model.Stars, stars))
+            </div>
+            <div class="row">
+                <p class="text-left" style="height: 60px">
+                    <i>@description</i>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-left">
+                    <strong>
+                        цена 2 легла: @Model.Price
+                    </strong>
+                </div>
+                <div class="col-md-4">
+                    <strong>
+                        За контакти: @Model.PhoneForReservation
+                    </strong>
+                </div>
+                <div class="col-md-2">
+                    <a href="#">виж още</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+}
