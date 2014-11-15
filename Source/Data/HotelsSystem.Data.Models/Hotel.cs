@@ -48,16 +48,16 @@
 
         [Required]
         [Range(0, 20000)]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public string HotelOwnerId { get; set; }
 
         public virtual ApplicationUser HotelOwner { get; set; }
 
+        public int TimesVisited { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
-
-        public int TimesVisited { get; set; }
     }
 }
