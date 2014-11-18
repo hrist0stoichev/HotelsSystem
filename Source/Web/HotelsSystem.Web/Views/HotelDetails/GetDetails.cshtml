@@ -10,7 +10,27 @@
     </h2>
 </div>
 <div class="row">
-    @Html.Image("http://media-cdn.tripadvisor.com/media/photo-s/03/0c/2e/fe/hotel-ibis-hermosillo.jpg", "image", new { @class = "img-thumbnail" })
+    <div class="col-md-6">
+        @Html.Image("http://media-cdn.tripadvisor.com/media/photo-s/03/0c/2e/fe/hotel-ibis-hermosillo.jpg", "image", new { @class = "img-thumbnail", id = "bigImg" })
+    </div>
+    <div class="col-md-6" id="images3">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Image("http://www.carpedmhotel.com/images/defaultroom.jpg", "image", new { @class = "img-thumbnail" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Image("http://www.radissonblu.com/images/hotel-ghaziabad/1369345068525.jpg", "image", new { @class = "img-thumbnail" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Image("http://www.metropolehotel.com/sites/all/themes/metropole/images/photo-slider-hp/homepage_banner_2.jpg", "image", new { @class = "img-thumbnail" })
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -132,19 +152,28 @@
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 <script>
     var isHidden = true
-    
+
     $("#btnComments").on("click", function () {
-        if (isHidden)
-        {
+        if (isHidden) {
             $("#comments").show();
             isHidden = false;
             $("#btnComments").text("Скрий коментарите");
         }
-        else
-        {
+        else {
             $("#comments").hide();
             isHidden = true;
             $("#btnComments").text("Покажи коментарите");
         }
+    })
+</script>
+<script>
+    
+    $("#images3").on('click', 'img', function (e) {
+        var bigImg = $('#bigImg');
+        var bigImgUrl = bigImg.attr('src');
+        var smallPictureUrl = $(this).attr('src');
+
+        $(this).attr('src', bigImgUrl);
+        bigImg.attr('src', smallPictureUrl);
     })
 </script>
