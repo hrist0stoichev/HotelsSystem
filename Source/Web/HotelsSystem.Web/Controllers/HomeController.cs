@@ -13,18 +13,23 @@
     public class HomeController : Controller
     {
         private readonly IDeletableEntityRepository<Place> places;
+        private readonly IDeletableEntityRepository<Area> areas;
 
-        public HomeController(IDeletableEntityRepository<Place> places)
+        public HomeController(IDeletableEntityRepository<Place> places, IDeletableEntityRepository<Area> areas)
         {
             this.places = places;
+            this.areas = areas;
         }
 
+        [OutputCache(Duration = 60)]
         public ActionResult Index(int? page)
         {
             var hotels = this.places.All()
                 .OrderBy(h => h.TimesVisited)
                 .Project().To<IndexHotelViewModel>()
                 .ToPagedList(page ?? 1, 20);
+
+            ViewBag.Areas = this.areas.All();
 
             return this.View(hotels);
         }

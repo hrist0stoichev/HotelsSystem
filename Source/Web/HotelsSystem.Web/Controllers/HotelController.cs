@@ -29,7 +29,8 @@
             var model = new AddInputModel();
 
             ViewBag.Stars = GenerateListItemsForStars();
-            ViewBag.Areas = GenerateListItemsForAreas();
+            ViewBag.AreasList = GenerateListItemsForAreas();
+            ViewBag.Areas = this.areas.All();
 
             return View(model);
         }
@@ -66,7 +67,8 @@
             else
             {
                 ViewBag.Stars = GenerateListItemsForStars();
-                ViewBag.Areas = GenerateListItemsForAreas();
+                ViewBag.AreasList = GenerateListItemsForAreas();
+                ViewBag.Areas = this.areas.All();
 
                 return this.View(model);
             }

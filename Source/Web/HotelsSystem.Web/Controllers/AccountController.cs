@@ -11,6 +11,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
+    using HotelsSystem.Data.Common.Repository;
     
     [Authorize]
     public class AccountController : Controller
@@ -22,14 +23,17 @@
 
         private ApplicationSignInManager signInManager;
 
+        private readonly IDeletableEntityRepository<Area> areas;
+
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IDeletableEntityRepository<Area> areas)
         {
             this.UserManager = userManager;
             this.SignInManager = signInManager;
+            this.areas = areas;
         }
 
         public ApplicationUserManager UserManager
@@ -71,6 +75,7 @@
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            
             return this.View();
         }
 
@@ -82,6 +87,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -93,12 +99,14 @@
                 case SignInStatus.Success:
                     return this.RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    
                     return this.View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    
                     return this.View(model);
             }
         }
@@ -110,6 +118,7 @@
             // Require that the user has already logged in via username/password or external login
             if (!await this.SignInManager.HasBeenVerifiedAsync())
             {
+                
                 return this.View("Error");
             }
 
@@ -132,6 +141,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -145,10 +155,12 @@
                 case SignInStatus.Success:
                     return this.RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
+                    
                     return this.View("Lockout");
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError(string.Empty, "Invalid code.");
+                    
                     return this.View(model);
             }
         }
@@ -157,6 +169,7 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
+            
             return this.View();
         }
 
@@ -186,6 +199,7 @@
             }
 
             // If we got this far, something failed, redisplay form
+            
             return this.View(model);
         }
 
@@ -195,10 +209,12 @@
         {
             if (userId == null || code == null)
             {
+                
                 return this.View("Error");
             }
 
             var result = await this.UserManager.ConfirmEmailAsync(userId, code);
+            
             return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -206,6 +222,7 @@
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
+            
             return this.View();
         }
 
@@ -221,6 +238,7 @@
                 if (user == null || !(await this.UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
+                    
                     return this.View("ForgotPasswordConfirmation");
                 }
 
@@ -233,6 +251,7 @@
             }
 
             // If we got this far, something failed, redisplay form
+            
             return this.View(model);
         }
 
@@ -240,6 +259,7 @@
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
+            
             return this.View();
         }
 
@@ -258,6 +278,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -275,6 +296,7 @@
             }
 
             this.AddErrors(result);
+            
             return this.View();
         }
 
@@ -282,6 +304,7 @@
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
+            
             return this.View();
         }
 
@@ -302,11 +325,13 @@
             var userId = await this.SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
+                
                 return this.View("Error");
             }
 
             var userFactors = await this.UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            
             return this.View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
@@ -318,12 +343,14 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View();
             }
 
             // Generate the token and send it
             if (!await this.SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
+                
                 return this.View("Error");
             }
 
@@ -347,14 +374,17 @@
                 case SignInStatus.Success:
                     return this.RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    
                     return this.View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
+                    
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    
                     return this.View(
                         "ExternalLoginConfirmation",
                         new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
@@ -378,6 +408,7 @@
                 var info = await this.AuthenticationManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
+                    
                     return this.View("ExternalLoginFailure");
                 }
 
@@ -396,6 +427,7 @@
                 this.AddErrors(result);
             }
 
+            
             ViewBag.ReturnUrl = returnUrl;
             return this.View(model);
         }
@@ -413,6 +445,7 @@
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
+            
             return this.View();
         }
 

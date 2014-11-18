@@ -197,6 +197,7 @@
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="InputModels\Area\AddAreaInputModel.cs" />
     <Compile Include="InputModels\Comment\AddCommentInputModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
@@ -216,7 +218,6 @@
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="InputModels\Hotel\AddInputModel.cs" />
-    <Compile Include="ViewModels\Comment\CommentsViewModel.cs" />
     <Compile Include="ViewModels\HotelDetails\PlaceDetailsViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
@@ -302,6 +303,7 @@
     <Content Include="Views\Hotel\Add.cshtml" />
     <Content Include="Views\HotelDetails\GetDetails.cshtml" />
     <Content Include="Views\Comments\Add.cshtml" />
+    <Content Include="Views\Area\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,6 +12,7 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
+    using HotelsSystem.Data.Common.Repository;
 
     [Authorize]
     public class ManageController : Controller
@@ -21,13 +22,16 @@
 
         private ApplicationUserManager userManager;
 
+        private readonly IDeletableEntityRepository<Area> areas;
+
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager)
+        public ManageController(ApplicationUserManager userManager, IDeletableEntityRepository<Area> areas)
         {
             this.UserManager = userManager;
+            this.areas = areas;
         }
 
         public enum ManageMessageId
@@ -73,6 +77,7 @@
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : string.Empty;
+            
 
             var model = new IndexViewModel
             {
@@ -82,6 +87,7 @@
                 Logins = await this.UserManager.GetLoginsAsync(User.Identity.GetUserId()),
                 BrowserRemembered = await this.AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
             };
+            
             return this.View(model);
         }
 
@@ -90,6 +96,7 @@
         {
             var linkedAccounts = this.UserManager.GetLogins(User.Identity.GetUserId());
             ViewBag.ShowRemoveButton = this.HasPassword() || linkedAccounts.Count > 1;
+            
             return this.View(linkedAccounts);
         }
 
@@ -121,6 +128,7 @@
         // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {
+            
             return this.View();
         }
 
@@ -131,6 +139,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -193,6 +202,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -210,6 +220,7 @@
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError(string.Empty, "Failed to verify phone");
+            
             return this.View(model);
         }
 
@@ -234,6 +245,7 @@
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
+            
             return this.View();
         }
 
@@ -244,6 +256,7 @@
         {
             if (!ModelState.IsValid)
             {
+                
                 return this.View(model);
             }
 
@@ -260,12 +273,14 @@
             }
 
             this.AddErrors(result);
+            
             return this.View(model);
         }
 
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
         {
+            
             return this.View();
         }
 
@@ -292,6 +307,7 @@
             }
 
             // If we got this far, something failed, redisplay form
+            
             return this.View(model);
         }
 
@@ -302,15 +318,19 @@
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : string.Empty;
+            
             var user = await this.UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user == null)
             {
+                
                 return this.View("Error");
             }
 
             var userLogins = await this.UserManager.GetLoginsAsync(User.Identity.GetUserId());
             var otherLogins = this.AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
+            
+            
             return this.View(new ManageLoginsViewModel { CurrentLogins = userLogins, OtherLogins = otherLogins });
         }
 
