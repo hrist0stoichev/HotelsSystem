@@ -1,0 +1,29 @@
+﻿@model HotelsSystem.Web.InputModels.Comment.AddCommentInputModel
+@{
+    ViewBag.Title = "Добави коментар";
+    string placeName = ViewBag.PlaceName as String;
+}
+
+<h2>Добави коментар за @placeName</h2>
+
+@using (Html.BeginForm("Add", "Comments", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="row text-center">
+            <h2>
+                @Html.LabelFor(c => c.Content, new { @class = "control-label" })
+            </h2>
+        </div>
+        <div class="row">
+            @Html.TextAreaFor(c => c.Content, new { @class = "form-control", @style = "max-width: 1200px; width: 1200px; height:200px" })
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <input type="submit" value="Добави коментар" class="btn btn-primary btn-lg" />
+    </div>
+}
+
