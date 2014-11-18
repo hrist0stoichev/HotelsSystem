@@ -20,6 +20,7 @@
         }
 
         [HttpGet]
+        [OutputCache(Duration = 60)]
         public ActionResult GetDetails(string hotelName)
         {
             var hotel = this.places.All()
