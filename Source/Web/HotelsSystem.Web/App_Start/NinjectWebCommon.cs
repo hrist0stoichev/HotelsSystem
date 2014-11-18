@@ -68,7 +68,7 @@ namespace HotelsSystem.Web
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
 
-            //kernel.Bind(typeof(IRepository<Hotel>)).To(typeof(DeletableEntityRepository<Hotel>));
+            //kernel.Bind(typeof(IRepository<Place>)).To(typeof(DeletableEntityRepository<Place>));
 
             kernel.Bind(typeof(IDeletableEntityRepository<>))
                 .To(typeof(DeletableEntityRepository<>));

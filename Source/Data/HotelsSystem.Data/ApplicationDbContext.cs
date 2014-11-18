@@ -10,6 +10,7 @@
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -18,7 +19,11 @@
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
-        public IDbSet<Hotel> Hotels { get; set; }
+        public IDbSet<Place> Places { get; set; }
+
+        public IDbSet<Image> Images { get; set; }
+
+        public IDbSet<Comment> Comments { get; set; }
 
         public IDbSet<Area> Areas { get; set; }
 

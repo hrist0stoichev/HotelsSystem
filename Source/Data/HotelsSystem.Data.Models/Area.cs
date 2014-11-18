@@ -1,5 +1,7 @@
 ﻿namespace HotelsSystem.Data.Models
 {
+    using System;
+
     using HotelsSystem.Data.Common.Models;
 
     public class Area : AuditInfo, IDeletableEntity
@@ -10,6 +12,6 @@
 
         public bool IsDeleted { get; set; }
 
-        public System.DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
     }
 }

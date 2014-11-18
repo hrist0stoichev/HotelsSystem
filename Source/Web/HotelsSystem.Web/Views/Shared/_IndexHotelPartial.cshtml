@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-7">
             <div class="row">
-                @Html.Raw(string.Format("<h3>Хотел \"{0}\", {1}, {2} {3}</h3>", Model.Name, Model.Area.Name, Model.Stars, stars))
+                @Html.Raw(string.Format("<h3>{0} \"{1}\", {2}, {3} {4}</h3>", Model.PlaceType, Model.Name, Model.Area.Name, Model.Stars, stars))
             </div>
             <div class="row">
                 <p class="text-left" style="height: 60px">
@@ -28,7 +28,7 @@
                     </strong>
                 </div>
                 <div class="col-md-2">
-                    <a href="#">виж още</a>
+                    <a href="~/Details/@Model.Name">виж още</a>
                 </div>
             </div>
         </div>

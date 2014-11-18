@@ -4,7 +4,7 @@
     using HotelsSystem.Web.Infrastructure.Mapping;
     using System.ComponentModel.DataAnnotations;
 
-    public class AddInputModel : IMapFrom<Hotel>
+    public class AddInputModel : IMapFrom<Place>
     {
         [Required]
         [MaxLength(100)]

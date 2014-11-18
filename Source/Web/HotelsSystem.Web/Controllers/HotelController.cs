@@ -13,12 +13,12 @@
 
     public class HotelController : Controller
     {
-        private readonly IDeletableEntityRepository<Hotel> hotels;
+        private readonly IDeletableEntityRepository<Place> places;
         private readonly IDeletableEntityRepository<Area> areas;
 
-        public HotelController(IDeletableEntityRepository<Hotel> hotels, IDeletableEntityRepository<Area> areas)
+        public HotelController(IDeletableEntityRepository<Place> places, IDeletableEntityRepository<Area> areas)
         {
-            this.hotels = hotels;
+            this.places = places;
             this.areas = areas;
         }
 
@@ -43,7 +43,7 @@
             {
                 var userId = this.User.Identity.GetUserId();
 
-                var hotel = new Hotel
+                var hotel = new Place
                 {
                     Name = model.Name,
                     Description = model.Description,
@@ -59,8 +59,8 @@
                     AreaId = model.AreaId
                 };
 
-                this.hotels.Add(hotel);
-                this.hotels.SaveChanges();
+                this.places.Add(hotel);
+                this.places.SaveChanges();
                 return this.RedirectToAction("Index", "Home");
             }
             else
