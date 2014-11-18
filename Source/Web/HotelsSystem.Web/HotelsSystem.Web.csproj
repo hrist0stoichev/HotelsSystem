@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelDetailsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearchPlaceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -304,11 +305,12 @@
     <Content Include="Views\HotelDetails\GetDetails.cshtml" />
     <Content Include="Views\Comments\Add.cshtml" />
     <Content Include="Views\Area\Add.cshtml" />
+    <Content Include="Views\SearchPlace\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

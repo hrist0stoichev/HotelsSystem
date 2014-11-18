@@ -5,7 +5,7 @@
     ViewBag.Title = "Home Page";
 }
 <div class="container">
-    <h1>Всички хотели в България</h1>
+    <h1>Най-преглеждани</h1>
     @foreach (var hotel in Model)
     {
         Html.RenderPartial("_IndexHotelPartial", hotel);

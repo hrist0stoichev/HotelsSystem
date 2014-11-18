@@ -21,7 +21,6 @@
             this.areas = areas;
         }
 
-        [OutputCache(Duration = 60)]
         public ActionResult Index(int? page)
         {
             var hotels = this.places.All()

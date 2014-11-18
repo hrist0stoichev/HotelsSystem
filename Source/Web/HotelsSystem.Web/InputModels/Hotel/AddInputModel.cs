@@ -65,5 +65,8 @@
         [Display(Name = "Цена за нощувка")]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
+        [Display(Name = "Тип")]
+        public PlaceType PlaceType { get; set; }
     }
 }

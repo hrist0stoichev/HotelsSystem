@@ -57,7 +57,8 @@
                     AvailablePlaces = model.AvailablePlaces,
                     Email = model.Email,
                     Adress = model.Adress,
-                    AreaId = model.AreaId
+                    AreaId = model.AreaId,
+                    PlaceType = model.PlaceType
                 };
 
                 this.places.Add(hotel);
@@ -72,7 +73,6 @@
 
                 return this.View(model);
             }
-            
         }
 
         private IEnumerable<SelectListItem> GenerateListItemsForAreas()

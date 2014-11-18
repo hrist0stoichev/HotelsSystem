@@ -18,6 +18,12 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.LabelFor(m => m.PlaceType, new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.EditorFor(m => m.PlaceType, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(m => m.Description, new { @class = "col-lg-2 control-label" })
             <div class="col-lg-10">
                 @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "height: 200px" })
